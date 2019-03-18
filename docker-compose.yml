@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+
+  db:
+    image: postgres
+    volumes:
+      - ./project/tmp/db:/var/lib/postgresql/data
+    container_name: monit_ps_db
+    ports:
+      - "5432:5432"
+
+
+  web:
+    build: .
+    image: monit_ps_web_image:latest
+    working_dir: /project
+    volumes:
+      - ./project:/project
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    container_name: monit_ps_web
+
+
+  backend:
+    build: 
+      context: backend
+      dockerfile: Dockerfile
+  #   build: .
+    image: monit_ps_backend_image:latest
+  #   working_dir: /project
+    volumes:
+      - ./backend/monitrc:/etc/monit/monitrc
+    ports:
+      - "8080:80"
+      - "2812:2812"
+      
+  #   depends_on:
+  #     - db
+    container_name: monit_ps_backend
