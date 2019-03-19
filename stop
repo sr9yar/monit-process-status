@@ -1,0 +1,2 @@
+#!/bin/bash
+docker stop monit_ps_db monit_ps_backend monit_ps_web 

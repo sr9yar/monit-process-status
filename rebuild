@@ -2,3 +2,6 @@
 
 docker stop monit_ps_backend ; docker rm monit_ps_backend; docker rmi monit_ps_backend_image
 sudo docker-compose up -d
+
+# docker stop monit_ps_web ; docker rm monit_ps_web; docker rmi monit_ps_web_image
+# sudo docker-compose up -d

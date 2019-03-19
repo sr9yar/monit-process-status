@@ -1,0 +1,29 @@
+{
+  "name": "node-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sr9yar/monit-process-status.git"
+  },
+  "author": "sr9yar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sr9yar/monit-process-status/issues"
+  },
+  "homepage": "https://github.com/sr9yar/monit-process-status#readme",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "hapi": "^18.1.0",
+    "nes": "^10.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

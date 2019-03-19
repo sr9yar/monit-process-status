@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker exec -it monit_ps_backend bash
+# docker exec -it monit_ps_web bash
