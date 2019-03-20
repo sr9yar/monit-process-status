@@ -6,11 +6,26 @@
 document.addEventListener 'DOMContentLoaded', (event) ->
   monitSwitch = document.getElementById('monitSwitch')
   if monitSwitch
-    console.log ' monitSwitch status: ', monitSwitch.checked  
-    monitSwitch.addEventListener 'change', (event) ->
-      console.log ' monitSwitch changed: ', monitSwitch.checked , '[current value]'
+    checkStatus = ->
+      xhttp = new XMLHttpRequest
 
-      if monitSwitch.checked
+      xhttp.onreadystatechange = ->
+        if @readyState == 4 and @status == 200 
+          monitSwitch.checked = !!xhttp.responseText.res
+        return
+      xhttp.open 'GET', 'http://localhost:8000/status', true
+      xhttp.send()
+
+      return
+  
+    checkStatus
+    # setInterval checkStatus, 1000
+    console.log ' monitSwitch status: ', monitSwitch.checked  
+
+    monitSwitch.addEventListener 'change', (event) ->
+      console.log ' monitSwitch changed: ', event.target.checked
+      monitSwitch.checked = event.target.checked
+      if !monitSwitch.checked
           xhttp = new XMLHttpRequest
 
           xhttp.onreadystatechange = ->
@@ -29,23 +44,10 @@ document.addEventListener 'DOMContentLoaded', (event) ->
         xhttp.open 'GET', 'http://localhost:8000/start', true
         xhttp.send()
 
-      monitSwitch.checked = !monitSwitch.checked
       return
 
 
-  checkStatus = ->
-    xhttp = new XMLHttpRequest
 
-    xhttp.onreadystatechange = ->
-      if @readyState == 4 and @status == 200 
-        monitSwitch.checked = !!xhttp.responseText.res
-      return
-    xhttp.open 'GET', 'http://localhost:8000/status', true
-    xhttp.send()
-
-    return
-
-  setInterval checkStatus, 1000
 
   path = '/updates'
   wshost = 'ws://localhost:8000'
@@ -75,4 +77,9 @@ document.addEventListener 'DOMContentLoaded', (event) ->
 
 
 
+  closePage = ->
+    navigator.sendBeacon 'http://localhost:8000/stop', {}
+    return
+
+  window.addEventListener 'unload', closePage, false
   return

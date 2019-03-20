@@ -6,10 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 # debconf error 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client  net-tools
+RUN apt-get update -qq && apt-get install -y npm nodejs postgresql-client  net-tools
 
 # required by curb
-RUN apt-get install -y libcurl3 libcurl3-gnutls libcurl4-openssl-dev
+# RUN apt-get install -y libcurl3 libcurl3-gnutls libcurl4-openssl-dev
 
 
 ADD project /project

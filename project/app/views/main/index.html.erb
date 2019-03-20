@@ -1,9 +1,14 @@
-<h1 class="red"> Monit process management example </h1>
-<p> Switches the status of the process, handled by Monit on a remote server ( in this example another docker container ) </p>
+<h1 class="red"> Remote server process control </h1>
+<p> Switches the status of the process on a remote server ( in this example another docker container ) </p>
+
+<h3 > 1. The RoR app is no http://localhost:3000 </h3>
+<h3> 2. The remote server exposes an API on http://localhost:8000 (Node JS App) </h3>
+<h3> 3. The controlled process is nginx  running on the same remote server as NodeJs API  http://localhost:80 </h3>
 
 
 <label class="switch">
   <input id="monitSwitch" type="checkbox">
   <span class="slider round"></span>
 </label>
+
 

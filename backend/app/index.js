@@ -56,12 +56,11 @@ server.route({
 
 // 
 server.route({
-    method:'GET',
+    method: ['GET' , 'POST'],
     path:'/stop',
     handler: (request,h) => {
         console.log( 'Stopping ... ' );
 
-        server.publish('/updates', { res: false } );
 
         try {
         const ret = execSync('/etc/init.d/nginx stop');
@@ -70,6 +69,7 @@ server.route({
         catch(err) {
             console.log(' Error while stopping ', err );
         }
+        server.publish('/updates', { res: false } );
         return {res: false};
     }
 });
@@ -82,7 +82,7 @@ server.route({
     handler: (request,h) => {
         console.log( 'Starting  ... ' );
 
-        server.publish('/updates', { res: true });
+
 
         try {
         const ret = execSync('/etc/init.d/nginx start');
@@ -90,6 +90,8 @@ server.route({
         catch(err) {
             console.log(' Error while starting ', err );
         }
+
+        server.publish('/updates', { res: true });
         return {res: true};
     }
 });
@@ -112,8 +114,6 @@ server.route({
         return {res: result};
     }
 });
-
-
 
 
  

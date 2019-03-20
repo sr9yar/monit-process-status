@@ -30,13 +30,14 @@ services:
       dockerfile: Dockerfile
   #   build: .
     image: monit_ps_backend_image:latest
-  #   working_dir: /project
+    working_dir: /app
     volumes:
-      - ./backend/monitrc:/etc/monit/monitrc
+      - ./backend/app:/app
+      # - ./backend/monitrc:/etc/monit/monitrc
     ports:
-      - "8080:80"
+      - "80:80"
       - "8000:8000"
-      - "2812:2812"
+      # - "2812:2812"
       
   #   depends_on:
   #     - db

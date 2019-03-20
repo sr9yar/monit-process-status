@@ -3,7 +3,11 @@
 # service monit start
 
 # cd /app && npm start
-cd /app && node index.js
+
+service nginx start
+cd /app 
+# node index.js
+npm start
 
 
 
